@@ -15,13 +15,16 @@ class OrderList extends StatefulWidget {
 class _OrderListState extends State<OrderList> {
   @override
   Widget build(BuildContext build) {
-    return ListView.builder(
-      itemCount: widget.orders.length,
-      itemBuilder: (context, index) {
-        return OrderItem(
-          order: widget.orders[index],
-        );
-      },
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+      child: ListView.builder(
+        itemCount: widget.orders.length,
+        itemBuilder: (context, index) {
+          return OrderItem(
+            order: widget.orders[index],
+          );
+        },
+      ),
     );
   }
 }

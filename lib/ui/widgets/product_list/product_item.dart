@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../order_modifier.dart';
 import '../../../models/models.dart';
 
 class ProductItem extends StatefulWidget {
@@ -98,38 +100,26 @@ class _ProductItemState extends State<ProductItem> {
         } else {
           // TO:DO Transform this into its own widget
           final modifyProduct = orderManager.modifyOrder;
-          return Row(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  if (widget.product.orders == 1) {
-                    final removeProduct = orderManager.removeOrder;
-                    removeProduct(widget.product.id);
-                    setState(() {
-                      ordered = false;
-                    });
-                  } else {
-                    modifyProduct(
-                        widget.product.id, widget.product.orders - 1);
-                  }
-                },
-                child: const Icon(
-                  Icons.remove,
-                  size: 20.0,
-                )),
-              const SizedBox(width: 16.0),
-              Text(widget.product.orders.toString()),
-              const SizedBox(width: 16.0),
-              GestureDetector(
-                  onTap: () {
-                    modifyProduct(widget.product.id, widget.product.orders + 1);
-                  },
-                  child: const Icon(
-                    Icons.add,
-                    size: 20.0
-                  )),
-            ],
-          );
+          void increment() {
+            modifyProduct(widget.product.id, widget.product.orders + 1);
+          }
+
+          void decrement() {
+            if (widget.product.orders == 1) {
+              final removeProduct = orderManager.removeOrder;
+              removeProduct(widget.product.id);
+              setState(() {
+                ordered = false;
+              });
+            } else {
+              modifyProduct(widget.product.id, widget.product.orders - 1);
+            }
+          }
+
+          return OrderModifier(
+              decrement: decrement,
+              increment: increment,
+              orders: widget.product.orders);
         }
       },
     );
