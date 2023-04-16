@@ -34,6 +34,13 @@ class _MainScreenState extends State<MainScreen> {
     return AppBar(
       backgroundColor: Theme.of(context).primaryColor,
       leading: IconButton(onPressed: () {}, icon: const Icon(Icons.menu)),
+      title: const SizedBox(
+        height: 56.0,
+        child: Image(
+          image: AssetImage('assets/images/uncm-logo.png'),
+          fit: BoxFit.contain,
+        ),
+      ),
       actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.search))],
     );
   }
