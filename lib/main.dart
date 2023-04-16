@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:uncm/models/order_manager.dart';
+
 import './ui/screens/screens.dart';
 import 'theme.dart';
 
@@ -11,10 +14,15 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Un:cm',
-      home: const Home(),
-      theme: AppTheme.mainTheme,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => OrderManager())
+      ],
+      child: MaterialApp(
+        title: 'Un:cm',
+        home: const MainScreen(),
+        theme: AppTheme.mainTheme,
+      ),
     );
   }
 }

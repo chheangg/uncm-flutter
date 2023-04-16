@@ -1,20 +1,31 @@
 import 'package:flutter/material.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+import './home_screen.dart';
+import './order_screen.dart';
+import './status_screen.dart';
+import './profile_screen.dart';
+
+final screens = [
+    HomeScreen(),
+    OrderScreen(),
+    StatusScreen(),
+    ProfileScreen(),
+];
+
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class _HomeState extends State<Home> {
+class _MainScreenState extends State<MainScreen> {
   int pageIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
-      body: Container(),
+      body: screens[pageIndex],
       bottomNavigationBar: buildBottomNavigationBar(context),
     );
   }
@@ -36,11 +47,15 @@ class _HomeState extends State<Home> {
           });
         },
         type: BottomNavigationBarType.fixed,
+        selectedLabelStyle: const TextStyle(
+          fontSize: 12.0
+        ),
         backgroundColor: Theme.of(context).primaryColor,
         unselectedItemColor: Colors.grey[50],
         selectedItemColor: Colors.orange[300],
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart), label: 'Order'),
           BottomNavigationBarItem(
