@@ -8,7 +8,7 @@ class OrderManager extends ChangeNotifier {
   final List<Product> _orders = [];
   List<Product> get orders => List.unmodifiable(_orders);
 
-  Product? getProductItem(String productId) {
+  Product? getOrderItem(String productId) {
     final productIndex = findProduct(_orders, productId);
     if (productIndex == -1) {
       return null;
@@ -28,7 +28,7 @@ class OrderManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeOrder(String productId, int amount) {
+  void removeOrder(String productId) {
     final productIndex = findProduct(_orders, productId);
     _orders.removeAt(productIndex);
     notifyListeners();
